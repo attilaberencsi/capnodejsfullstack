@@ -1,0 +1,42 @@
+<mvc:View controllerName="ns.mitigations.controller.Object"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:f="sap.ui.layout.form">
+
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
+
+        <semantic:titleHeading>
+            <Title text="{description}" />
+        </semantic:titleHeading>
+
+        <semantic:headerContent>
+            <ObjectNumber
+            />
+        </semantic:headerContent>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+        <semantic:content>
+            <VBox class="sapUiSmallMargin">
+                <f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" title="Details" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                    <f:content>
+                        <Label text="Description" />
+                        <Text id="idDescription" text="{description}" />
+                        <Label text="Owner" />
+                        <Text id="idOwner" text="{owner}" />
+                        <Label text="Timeline" />
+                        <Text id="idTimeline" text="{timeline}" />
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+
+        </semantic:content>
+
+
+    </semantic:SemanticPage>
+
+</mvc:View>
