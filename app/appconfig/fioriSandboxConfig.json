@@ -1,0 +1,84 @@
+{
+    "services": {
+      "LaunchPage": {
+        "adapter": {
+          "config": {
+            "catalogs": [],
+            "groups": [
+              {
+                "id": "RisksManagement",
+                "title": "Risks Management",
+                "isPreset": true,
+                "isVisible": true,
+                "isGroupLocked": false,
+                "tiles": [
+                  {
+                    "id": "ManageRisks",
+                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                    "properties": {
+                      "title": "Manage Risks",
+                      "targetURL": "#Risk-manage"
+                    }
+                  },
+                  {
+                    "id": "ManageMitigations",
+                    "tileType": "sap.ushell.ui.tile.StaticTile",
+                    "properties": {
+                      "title": "Manage Mitigations",
+                      "targetURL": "#Mitigations-manage"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "NavTargetResolution": {
+        "config": {
+          "enableClientSideTargetResolution": true
+        }
+      },
+      "ClientSideTargetResolution": {
+        "adapter": {
+          "config": {
+            "inbounds": {
+              "ManageRisks": {
+                "semanticObject": "Risk",
+                "action": "manage",
+                "title": "Manage Risks",
+                "signature": {
+                  "parameters": {
+                  },
+                  "additionalParameters": "ignored"
+                },
+                "resolutionResult": {
+                  "applicationType": "SAPUI5",
+                  "additionalInformation": "SAPUI5.Component=ns.risks",
+                  "url": "/risks/webapp"
+                }
+              },
+              "ManageMitigations": {
+                "semanticObject": "Mitigations",
+                "action": "manage",
+                "title": "Manage Mitigations",
+                "signature": {
+                  "parameters": {
+                    "Risks.miti.ID":{
+                      "renameTo": "ID"
+                    }
+                  },
+                  "additionalParameters": "ignored"
+                },
+                "resolutionResult": {
+                  "applicationType": "SAPUI5",
+                  "additionalInformation": "SAPUI5.Component=ns.mitigations",
+                  "url": "/mitigations/webapp"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
