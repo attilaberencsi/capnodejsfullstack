@@ -7,7 +7,8 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^6",
-    "express": "^4"
+    "express": "^4",
+    "hdb": "^0.19.0"
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.102.11",
@@ -49,5 +50,17 @@
   "sapux": [
     "app/risks",
     "app/mitigations"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": {
+          "kind": "hana-cloud"
+        }
+      },
+      "db": {
+        "kind": "sql"
+      }
+    }
+  }
 }
