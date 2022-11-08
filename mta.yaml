@@ -1,6 +1,6 @@
 _schema-version: '3.1'
 ID: cpapp
-version: 1.0.0
+version: 1.0.1
 description: "A simple CAP project."
 parameters:
   enable-parallel-deployments: true
@@ -25,7 +25,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: cpapp-db
-      - name: cpapp-auth
+      - name: cpapp-auth      
 
   - name: cpapp-db-deployer
     type: hdb
@@ -50,3 +50,12 @@ resources:
       config:
         xsappname: cpapp-${org}-${space}
         tenant-mode: dedicated
+        role-collections:
+          - name: 'RiskManager-${space}'
+            description: Manage Risks
+            role-template-references:
+              - $XSAPPNAME.RiskManager
+          - name: 'RiskViewer-${space}'
+            description: View Risks
+            role-template-references:
+              - $XSAPPNAME.RiskViewer      
