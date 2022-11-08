@@ -8,7 +8,9 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
+        - npm install --production
         - npx -p @sap/cds-dk cds build --production
+        - npx rimraf gen/db/src/gen/data
 modules:
   - name: cpapp-srv
     type: nodejs
