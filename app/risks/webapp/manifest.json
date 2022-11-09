@@ -15,24 +15,36 @@
             "version": "1.8.0",
             "toolsId": "7dcfe724-da1e-41fd-a003-ae6d809db961"
         },
-        "dataSources": {
-            "mainService": {
-                "uri": "/service/risk/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [
-                        "annotation"
-                    ],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "4.0"
+        "crossNavigation": {
+            "inbounds": {
+                "Risks-display": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Risks",
+                    "action": "display"
                 }
-            },
-            "annotation": {
-                "type": "ODataAnnotation",
-                "uri": "annotations/annotation.xml",
-                "settings": {
-                    "localUri": "annotations/annotation.xml"
-                }
+            }
+        }
+    },
+    "dataSources": {
+        "mainService": {
+            "uri": "/service/risk/",
+            "type": "OData",
+            "settings": {
+                "annotations": [
+                    "annotation"
+                ],
+                "localUri": "localService/metadata.xml",
+                "odataVersion": "4.0"
+            }
+        },
+        "annotation": {
+            "type": "ODataAnnotation",
+            "uri": "annotations/annotation.xml",
+            "settings": {
+                "localUri": "annotations/annotation.xml"
             }
         }
     },
@@ -141,5 +153,9 @@
     "sap.fiori": {
         "registrationIds": [],
         "archeType": "transactional"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "cpapp.service"
     }
 }
