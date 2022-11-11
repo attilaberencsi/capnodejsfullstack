@@ -1,43 +1,43 @@
 _schema-version: "3.1"
-ID: cpapp
-description: A simple CAP project.
-version: 1.0.5
+ID: cpapp3
+description: 3rd Project.
+version: 1.0.6
 modules:
-- name: cpapp-srv
+- name: cpapp3-srv
   type: nodejs
   path: gen/srv
   requires:
-  - name: cpapp-db
-  - name: cpapp-uaa
-  - name: cpapp-logs  
+  - name: cpapp3-db
+  - name: cpapp3-uaa
+  - name: cpapp3-logs  
   provides:
   - name: srv-api
     properties:
       srv-url: ${default-url}
   parameters:
     buildpack: nodejs_buildpack
-- name: cpapp-db-deployer
+- name: cpapp3-db-deployer
   type: hdb
   path: gen/db
   requires:
-  - name: cpapp-db
-  - name: cpapp-uaa
-  - name: cpapp-logs  
+  - name: cpapp3-db
+  - name: cpapp3-uaa
+  - name: cpapp3-logs  
   parameters:
-    buildpack: nodejs_buildpack
-- name: cpapp-destinations
+    buildpack: nodejs_buildpack 
+- name: cpapp3-destinations
   type: com.sap.application.content
   requires:
-  - name: cpapp-uaa
+  - name: cpapp3-uaa
     parameters:
       service-key:
-        name: cpapp-uaa-key
-  - name: cpapp-html5-repo-host
+        name: cpapp3-uaa-key
+  - name: cpapp3-html5-repo-host
     parameters:
       service-key:
-        name: cpapp-html5-repo-host-key
+        name: cpapp3-html5-repo-host-key
   - name: srv-api
-  - name: cpapp-destination
+  - name: cpapp3-destination
     parameters:
       content-target: true
   parameters:
@@ -45,28 +45,28 @@ modules:
       instance:
         destinations:
         - Authentication: OAuth2UserTokenExchange
-          Name: cpapp-app-srv
-          TokenServiceInstanceName: cpapp-uaa
-          TokenServiceKeyName: cpapp-uaa-key
+          Name: cpapp3-app-srv
+          TokenServiceInstanceName: cpapp3-uaa
+          TokenServiceKeyName: cpapp3-uaa-key
           URL: ~{srv-api/srv-url}
-          sap.cloud.service: cpapp.service
-        - Name: cpapp-html5-repo-host
-          ServiceInstanceName: cpapp-html5-repo-host
-          ServiceKeyName: cpapp-html5-repo-host-key
-          sap.cloud.service: cpapp.service
+          sap.cloud.service: cpapp3.service
+        - Name: cpapp3-html5-repo-host
+          ServiceInstanceName: cpapp3-html5-repo-host
+          ServiceKeyName: cpapp3-html5-repo-host-key
+          sap.cloud.service: cpapp3.service
         - Authentication: OAuth2UserTokenExchange
-          Name: cpapp-uaa
-          ServiceInstanceName: cpapp-uaa
-          ServiceKeyName: cpapp-uaa-key
-          sap.cloud.service: cpapp.service
+          Name: cpapp3-uaa
+          ServiceInstanceName: cpapp3-uaa
+          ServiceKeyName: cpapp3-uaa-key
+          sap.cloud.service: cpapp3.service
         existing_destinations_policy: update
   build-parameters:
     no-source: true
-- name: cpapp-app-content
+- name: cpapp3-app-content
   type: com.sap.application.content
   path: .
   requires:
-  - name: cpapp-html5-repo-host
+  - name: cpapp3-html5-repo-host
     parameters:
       content-target: true
   build-parameters:
@@ -101,32 +101,34 @@ modules:
     - npm run build:cf
     supported-platforms: []
 resources:
-- name: cpapp-db
+- name: cpapp3-db
   type: com.sap.xs.hdi-container
   parameters:
     service: hana
     service-plan: hdi-shared
+    config:
+      schema: TOOLSSCHEMA2    
   properties:
     hdi-service-name: ${service-name}
-- name: cpapp-uaa
+- name: cpapp3-uaa
   type: org.cloudfoundry.managed-service
   parameters:
     config:
       role-collections:
       - description: Manage Risks
-        name: RiskManager-${space}
+        name: RiskManager3-${space}
         role-template-references:
         - $XSAPPNAME.RiskManager
       - description: View Risks
-        name: RiskViewer-${space}
+        name: RiskViewer3-${space}
         role-template-references:
         - $XSAPPNAME.RiskViewer
       tenant-mode: dedicated
-      xsappname: cpapp-${space}
+      xsappname: cpapp3-${space}
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
-- name: cpapp-destination
+- name: cpapp3-destination
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -140,15 +142,15 @@ resources:
             Type: HTTP
             URL: https://ui5.sap.com
           existing_destinations_policy: update
-      version: 1.0.0
+      version: 1.0.1
     service: destination
     service-plan: lite
-- name: cpapp-html5-repo-host
+- name: cpapp3-html5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
     service-plan: app-host
-- name: cpapp-logs
+- name: cpapp3-logs
   type: org.cloudfoundry.managed-service
   parameters:
     service: application-logs

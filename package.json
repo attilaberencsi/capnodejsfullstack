@@ -1,5 +1,5 @@
 {
-    "name": "cpapp",
+    "name": "cpapp3",
     "version": "1.0.0",
     "description": "CAP Prototypping.",
     "repository": "<Add your repository here>",
@@ -21,7 +21,7 @@
         "start": "cds run",
         "watch-risks": "cds watch --open risks/webapp/index.html?sap-ui-xx-viewCache=false",
         "watch-mitigations": "cds watch --open mitigations/webapp/index.html?sap-ui-xx-viewCache=false",
-        "undeploy": "cf undeploy cpapp --delete-services --delete-service-keys --delete-service-brokers",
+        "undeploy": "cf undeploy cpapp3 --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
     },
