@@ -1,3 +1,4 @@
+// https://cap.cloud.sap/docs/node.js/services#event-handlers
 const cds = require('@sap/cds');
 const RiskValidation = require('./RiskValidation');
 
